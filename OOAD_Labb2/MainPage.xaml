@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+    <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 mc:Ignorable="d"
+                 x:Class="OOAD_Labb2.MainPage">
+
+        <ContentPage.ToolbarItems>
+            <ToolbarItem Text="Fetch current space-info" Command="{Binding ShowCommand}" />      
+                 
+        </ContentPage.ToolbarItems>
+
+        <Grid>
+            <Grid.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="10,30,10,5" />
+                        <On Platform="Android" Value="10,10,10,5" />
+                </OnPlatform>
+            </Grid.Padding>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="4*" />
+             </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="{Binding NumberOfPeopleInSpace, StringFormat='Amount of people currently in space: {0:N}'}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Grid.Row="0"
+                   Grid.Column="0"/>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               HeightRequest="100"
+                               Grid.Row="1"
+                               Grid.Column="0"/>
+
+
+            <ListView ItemsSource="{Binding AstronautList}" HasUnevenRows="True" Grid.Row="2" Grid.Column="0">
+                <ListView.ItemTemplate >
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="10" RowSpacing="10">
+                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width ="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding Name, StringFormat='Name: {0:N}'}" Grid.Row = "0" Grid.Column="0" />
+                                <Label Text="{Binding Craft, StringFormat='Craft: {0:N}'}" Grid.Row = "1" Grid.Column="0" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+             </ListView>
+        </Grid>
+   
+    </ContentPage>
